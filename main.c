@@ -3,6 +3,7 @@
 #include <string.h>
 //#include <tads.h>
 #include "algoritmos.c"
+#include "memoria.h"
 
 #define MIN_PARAM 5
 #define TAM_STRING 20
@@ -17,7 +18,8 @@ int main(int argc, char *argv[]){
     unsigned addr;
     char rw;
     long ender_page;
-
+    // memoria m;
+    // bloco b;
 
     //Recebendo parâmetros
     if(argc >= MIN_PARAM){
@@ -28,7 +30,7 @@ int main(int argc, char *argv[]){
 
         if (arq_entrada == NULL){
             printf("Problemas na leitura do arquivo \n");
-            return -1;
+            exit(-1);
         }
         tam_pagina = (int) atoi(argv[3]);
         tam_memoria = (int) atoi(argv[4]);
@@ -37,7 +39,7 @@ int main(int argc, char *argv[]){
         }
     } else {
         printf("\nErro! Estao faltando parametros.\n");
-        return -1;
+        exit(-1);
     }
 
     bits_ignorar = calc_bits_menos_signf(tam_pagina);
@@ -56,14 +58,27 @@ int main(int argc, char *argv[]){
         printf("\n2a");
     } else {
             printf("\nAlgoritmo nao existe. Utilize 'lru', 'fifo', 'random' ou '2a' para escolher o algoritmo.");
-            return -1;
+            exit(-1);
     }
 
+    // printf("\naqui1\n");
+    // b.pagina = 12;
+    // b.rw = 'r';
+    // b.time_stamp = 23;
+    // memoria_vazia(&m, 2);
+    // m[0] = b;
+    // b.rw = 'w';
+    // m[1] = b;
+    // printf("\naqui2\n");
+    // printf("\n>>>> Memoria >>>> pg: %ld / rw: %c / ts: %d\n", m[0].pagina, m[0].rw, m[0].time_stamp);
+    // printf("\n>>>> Memoria >>>> pg: %ld / rw: %c / ts: %d\n", m[1].pagina, m[1].rw, m[1].time_stamp);
 
     while (fscanf(arq_entrada,"%x %c",&addr,&rw) != EOF) {
         ender_page = addr >> bits_ignorar;
        // printf("\nendereco %ld", ender_page);
    }
-
+    
+    //free(m);
+    fclose(arq_entrada);
     return 0;
 }
