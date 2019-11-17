@@ -24,6 +24,7 @@ int main(int argc, char *argv[]){
     int indice = 0, time_stamp = 0;
     int num;
     memoria m;
+    
     // bloco b;
 
     //Recebendo parâmetros
