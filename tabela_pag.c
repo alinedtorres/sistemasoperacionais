@@ -34,17 +34,24 @@ void alterar_memoria(int indice, long int ender, char rw, long int time_stamp, m
     *m = m_aux;
 }
 
-int verificar_memoria(int* tabela_paginas, long int ender, int indice, char rw, long int time_stamp, memoria* m){
+int verificar_memoria(int* tabela_paginas, long int ender, int indice, char rw, long int time_stamp, memoria* m, int qtd_pgs){
 	int novo_indice = 0;
 	int i = 0;
 	if (tabela_paginas[ender] == 0){
-		novo_indice = associar_memoria(indice, ender, rw, time_stamp, &m);
-		tabela_paginas[ender] = novo_indice;
+		if (indice < qtd_pgs){
+			novo_indice = associar_memoria(indice, ender, rw, time_stamp, &m);
+			tabela_paginas[ender] = novo_indice;
+			return novo_indice;
+		}
+		else{
+			//pagefault
+			return -2;
+		}
 	}
 	else{
 		i = tabela_paginas[ender];
-		alterar_memoria(i, ender, rw, time_stamp, &m);
+		alterar_memoria(i, ender, rw, time_stamp, &m);		
+		return -1;
 	}
 
-	return novo_indice;
 }

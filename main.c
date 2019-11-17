@@ -24,6 +24,7 @@ int main(int argc, char *argv[]){
     int indice = 0, time_stamp = 0;
     int num;
     memoria m;
+    int aux = 0;
     
     // bloco b;
 
@@ -86,7 +87,19 @@ int main(int argc, char *argv[]){
 
     while (fscanf(arq_entrada,"%X %c",&addr,&rw) != EOF) {
         ender_page = addr >> bits_ignorar;
-        indice = verificar_memoria(tabela_paginas, addr, indice, rw, time_stamp, &m);
+        aux = verificar_memoria(tabela_paginas, addr, indice, rw, time_stamp, &m, qtd_pgs);
+        if (aux == -2){
+            //pagefault
+        }
+        else if (aux == -1){
+                //alteração
+        }
+        else{
+            //pagina associada
+            indice = aux;            
+        }
+
+
        // printf("\nendereco %ld", ender_page);
    }
     
