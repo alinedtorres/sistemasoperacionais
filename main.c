@@ -84,11 +84,11 @@ printf("\nAline\n");
     num = 32 - bits_ignorar;
     tam_tabela = pow(2,num);
 
-    tabela_vazia(&tabela_paginas, tam_tabela);
+    tabela_vazia(tabela_paginas, tam_tabela);
 
     while (fscanf(arq_entrada,"%X %c",&addr,&rw) != EOF) {
         ender_page = addr >> bits_ignorar;
-        aux = verificar_memoria(&tabela_paginas, ender_page, indice, rw, time_stamp, &m, qtd_pgs);
+        aux = verificar_memoria(tabela_paginas, ender_page, indice, rw, time_stamp, &m, qtd_pgs);
         //printf("\n%d\n", aux);
         /*if (aux == -2){
             //pagefault

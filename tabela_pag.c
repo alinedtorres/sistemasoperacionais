@@ -17,7 +17,7 @@ void tabela_vazia(int* tabela_paginas, long int tam_vetor){
             tabela_nova[i] = -1;
         }
 
-        *tabela_paginas = tabela_nova;
+        tabela_paginas = tabela_nova;
     }
 }
 

@@ -3,7 +3,7 @@
 #define __TABELA_PAG__
 
 
-int* tabela_paginas;
+//int* tabela_paginas;
 
 void tabela_vazia(int* tabela_paginas, long int tam_vetor);
 
