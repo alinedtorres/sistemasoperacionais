@@ -26,7 +26,7 @@ void memoria_vazia(memoria* m, int tam_memoria){
     }
 }
 
-int bloco_mais_antigo(memoria m, tam_memoria){
+int bloco_mais_antigo(memoria m, int tam_memoria){
     int i, end_bloco = 0;
     long int time;
     time = m[0].time_stamp;

@@ -23,7 +23,7 @@ int main(int argc, char *argv[]){
     long int tam_tabela;
     int indice = 0, time_stamp = 0;
     int num;
-    // memoria m;
+    memoria m;
     // bloco b;
 
     //Recebendo parâmetros
@@ -70,7 +70,7 @@ int main(int argc, char *argv[]){
     // b.pagina = 12;
     // b.rw = 'r';
     // b.time_stamp = 23;
-    // memoria_vazia(&m, 2);
+    memoria_vazia(&m, qtd_pgs);
     // m[0] = b;
     // b.rw = 'w';
     // m[1] = b;
