@@ -83,7 +83,7 @@ int main(int argc, char *argv[]){
 
     tabela_vazia(tabela_paginas, tam_tabela);
 
-    while (fscanf(arq_entrada,"%x %c",&addr,&rw) != EOF) {
+    while (fscanf(arq_entrada,"%X %c",&addr,&rw) != EOF) {
         ender_page = addr >> bits_ignorar;
         indice = verificar_memoria(tabela_paginas, addr, indice, rw, time_stamp, m);
        // printf("\nendereco %ld", ender_page);
