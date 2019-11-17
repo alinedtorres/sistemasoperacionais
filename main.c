@@ -86,7 +86,7 @@ int main(int argc, char *argv[]){
 
     while (fscanf(arq_entrada,"%X %c",&addr,&rw) != EOF) {
         ender_page = addr >> bits_ignorar;
-        indice = verificar_memoria(tabela_paginas, addr, indice, rw, time_stamp, m);
+        indice = verificar_memoria(tabela_paginas, addr, indice, rw, time_stamp, &m);
        // printf("\nendereco %ld", ender_page);
    }
     
