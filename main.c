@@ -2,10 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-//#include <tads.h>
-#include "algoritmos.c"
+#include "algoritmos.h"
 #include "memoria.h"
-#include "tabela_pag.c"
+#include "tabela_pag.h"
 
 #define MIN_PARAM 5
 #define TAM_STRING 20
@@ -90,6 +89,19 @@ int main(int argc, char *argv[]){
         aux = verificar_memoria(tabela_paginas, addr, indice, rw, time_stamp, &m, qtd_pgs);
         if (aux == -2){
             //pagefault
+            if(strcmp(algoritmo, "lru") == 0){
+                //lru();
+
+            } else if(strcmp(algoritmo, "fifo") == 0){
+                //fifo();
+
+            } else if(strcmp(algoritmo, "random") == 0){
+                random_alg(tabela_paginas, qtd_pgs, addr, rw, time_stamp, &m);
+
+            } else if(strcmp(algoritmo, "2a") == 0){
+                //segunda();
+
+            }
         }
         else if (aux == -1){
                 //alteração

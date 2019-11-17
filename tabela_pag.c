@@ -1,4 +1,8 @@
-int* tabela_paginas;
+
+#include "memoria.h"
+#include "tabela_pag.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 void tabela_vazia(int* tabela_paginas, long int tam_vetor){
     int* tabela_nova = (int*) malloc(sizeof(int)*tam_vetor);
@@ -39,7 +43,7 @@ int verificar_memoria(int* tabela_paginas, long int ender, int indice, char rw, 
 	int i = 0;
 	if (tabela_paginas[ender] == 0){
 		if (indice < qtd_pgs){
-			novo_indice = associar_memoria(indice, ender, rw, time_stamp, &m);
+			novo_indice = associar_memoria(indice, ender, rw, time_stamp, m);
 			tabela_paginas[ender] = novo_indice;
 			return novo_indice;
 		}
@@ -50,7 +54,7 @@ int verificar_memoria(int* tabela_paginas, long int ender, int indice, char rw, 
 	}
 	else{
 		i = tabela_paginas[ender];
-		alterar_memoria(i, ender, rw, time_stamp, &m);		
+		alterar_memoria(i, ender, rw, time_stamp, m);		
 		return -1;
 	}
 
