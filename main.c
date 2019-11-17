@@ -24,6 +24,7 @@ int main(int argc, char *argv[]){
     int num;
     memoria m;
     int aux = 0;
+    int* tabela_paginas;
     
     // bloco b;
 
@@ -66,7 +67,6 @@ int main(int argc, char *argv[]){
             printf("\nAlgoritmo nao existe. Utilize 'lru', 'fifo', 'random' ou '2a' para escolher o algoritmo.");
             exit(-1);
     }
-
     // printf("\naqui1\n");
     // b.pagina = 12;
     // b.rw = 'r';
@@ -79,15 +79,18 @@ int main(int argc, char *argv[]){
     // printf("\n>>>> Memoria >>>> pg: %ld / rw: %c / ts: %d\n", m[0].pagina, m[0].rw, m[0].time_stamp);
     // printf("\n>>>> Memoria >>>> pg: %ld / rw: %c / ts: %d\n", m[1].pagina, m[1].rw, m[1].time_stamp);
 
+printf("\nAline\n");
+            
     num = 32 - bits_ignorar;
     tam_tabela = pow(2,num);
 
-    tabela_vazia(tabela_paginas, tam_tabela);
+    tabela_vazia(&tabela_paginas, tam_tabela);
 
     while (fscanf(arq_entrada,"%X %c",&addr,&rw) != EOF) {
         ender_page = addr >> bits_ignorar;
-        aux = verificar_memoria(tabela_paginas, addr, indice, rw, time_stamp, &m, qtd_pgs);
-        if (aux == -2){
+        aux = verificar_memoria(&tabela_paginas, ender_page, indice, rw, time_stamp, &m, qtd_pgs);
+        //printf("\n%d\n", aux);
+        /*if (aux == -2){
             //pagefault
             if(strcmp(algoritmo, "lru") == 0){
                 //lru();
@@ -96,7 +99,7 @@ int main(int argc, char *argv[]){
                 //fifo();
 
             } else if(strcmp(algoritmo, "random") == 0){
-                random_alg(tabela_paginas, qtd_pgs, addr, rw, time_stamp, &m);
+                random_alg(&tabela_paginas, qtd_pgs, addr, rw, time_stamp, &m);
 
             } else if(strcmp(algoritmo, "2a") == 0){
                 //segunda();
@@ -110,7 +113,7 @@ int main(int argc, char *argv[]){
             //pagina associada
             indice = aux;            
         }
-
+*/
 
        // printf("\nendereco %ld", ender_page);
    }

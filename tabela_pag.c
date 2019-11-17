@@ -6,6 +6,7 @@
 
 void tabela_vazia(int* tabela_paginas, long int tam_vetor){
     int* tabela_nova = (int*) malloc(sizeof(int)*tam_vetor);
+    printf("\n tamanho vetor %ld", tam_vetor);
     int i;
     if(tabela_nova == NULL){
         printf("\nErro na alocacao para o novo vetor 'tabela nova'!\n");
@@ -13,7 +14,7 @@ void tabela_vazia(int* tabela_paginas, long int tam_vetor){
     } else {
 
         for(i = 0; i < tam_vetor; i++){
-            tabela_nova[i] = 0;
+            tabela_nova[i] = -1;
         }
 
         *tabela_paginas = tabela_nova;
@@ -41,20 +42,23 @@ void alterar_memoria(int indice, long int ender, char rw, long int time_stamp, m
 int verificar_memoria(int* tabela_paginas, long int ender, int indice, char rw, long int time_stamp, memoria* m, int qtd_pgs){
 	int novo_indice = 0;
 	int i = 0;
-	if (tabela_paginas[ender] == 0){
-		if (indice < qtd_pgs){
+
+        if(ender > 1048575 )
+        printf("\n %x, %ld", ender, ender);
+	if (tabela_paginas[ender] == -1){
+	/*		if (indice < qtd_pgs){
 			novo_indice = associar_memoria(indice, ender, rw, time_stamp, m);
 			tabela_paginas[ender] = novo_indice;
 			return novo_indice;
 		}
 		else{
 			//pagefault
-			return -2;
-		}
+		    return -2;
+		}*/
 	}
 	else{
-		i = tabela_paginas[ender];
-		alterar_memoria(i, ender, rw, time_stamp, m);		
+		/*i = tabela_paginas[ender];
+		alterar_memoria(i, ender, rw, time_stamp, m);	*/	
 		return -1;
 	}
 
