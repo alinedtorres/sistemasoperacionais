@@ -4,6 +4,7 @@
 //#include <tads.h>
 #include "algoritmos.c"
 #include "memoria.h"
+#include "tabela_pag.c"
 
 #define MIN_PARAM 5
 #define TAM_STRING 20
@@ -18,6 +19,8 @@ int main(int argc, char *argv[]){
     unsigned addr;
     char rw;
     long ender_page;
+    long int tam_tabela;
+    int indice = 0, time_stamp = 0;
     // memoria m;
     // bloco b;
 
@@ -73,8 +76,13 @@ int main(int argc, char *argv[]){
     // printf("\n>>>> Memoria >>>> pg: %ld / rw: %c / ts: %d\n", m[0].pagina, m[0].rw, m[0].time_stamp);
     // printf("\n>>>> Memoria >>>> pg: %ld / rw: %c / ts: %d\n", m[1].pagina, m[1].rw, m[1].time_stamp);
 
+    tam_tabela = 2^(32 - bits_ignorar);
+
+    tabela_vazia(tabela_paginas, tam_tabela);
+
     while (fscanf(arq_entrada,"%x %c",&addr,&rw) != EOF) {
         ender_page = addr >> bits_ignorar;
+        indice = verificar_memoria(tabela_paginas, addr, indice, rw, time_stamp, m);
        // printf("\nendereco %ld", ender_page);
    }
     

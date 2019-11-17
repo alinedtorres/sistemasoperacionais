@@ -9,4 +9,4 @@ typedef struct bloco* memoria;
 
 void memoria_vazia(memoria* m, int tam_memoria);
 
-int bloco_mais_antigo(memoria m, tam_memoria);
+int bloco_mais_antigo(memoria m, int tam_memoria);
