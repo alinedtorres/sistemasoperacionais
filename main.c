@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 //#include <tads.h>
 #include "algoritmos.c"
 #include "memoria.h"
@@ -21,6 +22,7 @@ int main(int argc, char *argv[]){
     long ender_page;
     long int tam_tabela;
     int indice = 0, time_stamp = 0;
+    int num;
     // memoria m;
     // bloco b;
 
@@ -76,7 +78,8 @@ int main(int argc, char *argv[]){
     // printf("\n>>>> Memoria >>>> pg: %ld / rw: %c / ts: %d\n", m[0].pagina, m[0].rw, m[0].time_stamp);
     // printf("\n>>>> Memoria >>>> pg: %ld / rw: %c / ts: %d\n", m[1].pagina, m[1].rw, m[1].time_stamp);
 
-    tam_tabela = 2^(32 - bits_ignorar);
+    num = 32 - bits_ignorar;
+    tam_tabela = pow(2,num);
 
     tabela_vazia(tabela_paginas, tam_tabela);
 
