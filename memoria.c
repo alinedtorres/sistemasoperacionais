@@ -3,7 +3,7 @@
 
 #include "memoria.h"
 
-void memoria_vazia(memoria* m, long int tam_memoria){
+void memoria_vazia(memoria* m, int tam_memoria){
     memoria nova = (bloco*) malloc(sizeof(bloco)*tam_memoria);
     bloco padrao;
     int i;
@@ -25,3 +25,18 @@ void memoria_vazia(memoria* m, long int tam_memoria){
         *m = nova;
     }
 }
+
+int bloco_mais_antigo(memoria m, tam_memoria){
+    int i, end_bloco = 0;
+    long int time;
+    time = m[0].time_stamp;
+    //Passa por todo o vetor até encontrar o menor tempo
+    for(i = 1; i < tam_memoria; i++){
+        if(time > m[i].time_stamp){
+            time = m[i].time_stamp;
+            end_bloco = i;
+        }
+    }
+    return end_bloco;
+}
+

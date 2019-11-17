@@ -2,9 +2,11 @@
 typedef struct bloco {
     long int pagina;
     char rw;
-    int time_stamp;
+    long int time_stamp;
 } bloco;
 
 typedef struct bloco* memoria;
 
-void memoria_vazia(memoria* m, long int tam_memoria);
+void memoria_vazia(memoria* m, int tam_memoria);
+
+int bloco_mais_antigo(memoria m, tam_memoria);
