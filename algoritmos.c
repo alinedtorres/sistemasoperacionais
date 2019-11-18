@@ -16,28 +16,29 @@ int calc_bits_menos_signf(int tam_pagina){
     return bits;
 }
 
-void random_alg(int* tabela_paginas, int qtd_pgs, long int ender, char rw, long int time_stamp, memoria* m){
-			int indice = rand() % qtd_pgs;
-<<<<<<< HEAD
-			int novo_indice = associar_memoria(indice, ender, rw, time_stamp, m);
-			tabela_paginas[ender] = novo_indice;
+// void random_alg(int* tabela_paginas, long int ender, char rw, long int tempo, memoria m, int tam_memoria){
+//     int indice = rand() % tam_memoria;
+//     tabela_paginas[m[indice].pagina] = -1;
+//     associar_memoria(indice, ender, rw, tempo, m);
+//     tabela_paginas[ender] = indice;
+// }
+
+void algoritmos_reposicao(int* tabela_paginas, long int ender, char rw, long int tempo, memoria m, int tam_memoria, int escolhido){
+    int indice;
+    if(escolhido == 0){ //0 para fifo 1 para lru 2 para random 3 para 2a
+        indice = indicado_fifo(m, tam_memoria, tempo);
+    } else if(escolhido == 1) {
+        indice = indicado_lru(m, tam_memoria, tempo);
+    } else if(escolhido == 2){
+        indice = rand() % tam_memoria;
+    } else if(escolhido == 3) {
+        indice = indicado_segunda(m, tam_memoria, tempo);
+    } else {
+        printf("\nValor invalido para algoritmo no metodo algoritmos_reposicao!\n");
+        exit(-1);
+    }
+    tabela_paginas[m[indice].pagina] = -1;
+    associar_memoria(indice, ender, rw, tempo, m);
+    tabela_paginas[ender] = indice;
 }
 
-void fifo_lru_alg(int* tabela_paginas, int qtd_pgs, long int ender, char rw, long int time_stamp, memoria m, char fifo_ou_lru){
-    int mais_antigo, novo_indice;
-    long int ultimo;
-    if(fifo_ou_lru){ //0 para fifo 1 para lru
-        mais_antigo = indicado_lru(m, qtd_pgs);
-    } else {
-        mais_antigo = indicado_fifo(m, qtd_pgs);
-    }
-    ultimo = m[mais_antigo].pagina;
-    novo_indice = associar_memoria(tabela_paginas[ultimo], ender, rw, time_stamp, &m);
-    tabela_paginas[ender] = tabela_paginas[ultimo];
-    tabela_paginas[ultimo] = -1;
-}
-=======
-			 associar_memoria(indice, ender, rw, time_stamp, m);
-			tabela_paginas[ender] = indice;
-}
->>>>>>> 5aca59682136094eab191b57f757d1b47b39d11a

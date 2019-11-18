@@ -27,31 +27,55 @@ void memoria_vazia(memoria* m, int tam_memoria){
     }
 }
 
-int indicado_fifo(memoria m, int tam_memoria){
-    int i, end_bloco = 0;
-    long int time;
-    time = m[0].tempo_entrada;
+int indicado_fifo(memoria m, int tam_memoria, long int tempo_atual){
+    int i, ender_bloco = 0;
+    long int tempo = tempo_atual;
     //Passa por todo o vetor até encontrar o menor tempo
-    for(i = 1; i < tam_memoria; i++){
-        if(time > m[i].tempo_entrada){
-            time = m[i].tempo_entrada;
-            end_bloco = i;
+    for(i = 0; i < tam_memoria; i++){
+        if(tempo > m[i].tempo_entrada){
+            tempo = m[i].tempo_entrada;
+            ender_bloco = i;
         }
     }
-    return end_bloco;
+    return ender_bloco;
 }
 
-int indicado_lru(memoria m, int tam_memoria){
-    int i, end_bloco = 0;
-    long int time;
-    time = m[0].tempo_acesso;
+int indicado_lru(memoria m, int tam_memoria, long int tempo_atual){
+    int i, ender_bloco = -1;
+    long int tempo = tempo_atual;
     //Passa por todo o vetor até encontrar o menor tempo
-    for(i = 1; i < tam_memoria; i++){
-        if(time > m[i].tempo_acesso){
-            time = m[i].tempo_acesso;
-            end_bloco = i;
+    for(i = 0; i < tam_memoria; i++){
+        if(m[i].tempo_acesso > -1){
+            if(tempo > m[i].tempo_acesso){
+                tempo = m[i].tempo_acesso;
+                ender_bloco = i;
+            }
         }
     }
-    return end_bloco;
+    //Caso nenhum arquivo tenha sido acessado desde seu carregamento na memória.
+    if(ender_bloco == -1){
+        return indicado_fifo(m, tam_memoria, tempo_atual);
+    }
+    return ender_bloco;
+}
+
+int indicado_segunda(memoria m, int tam_memoria, long int tempo_atual){
+    int i, ender_bloco = -1;
+    long int tempo = tempo_atual;
+    for(i = 0; i < tam_memoria; i++){
+        if(m[i].tempo_acesso > -1){
+            if((tempo_atual - m[i].tempo_acesso) <= TEMPO_RECENTE){
+                if(tempo > m[i].tempo_entrada){
+                    tempo = m[i].tempo_entrada;
+                    ender_bloco = i;
+                }
+            }
+        }
+    }
+    //Caso nenhum arquivo tenha sido acessado desde seu carregamento na memória.
+    if(ender_bloco == -1){
+        return indicado_fifo(m, tam_memoria, tempo_atual);
+    }
+    return ender_bloco;
 }
 
