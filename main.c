@@ -21,6 +21,9 @@ int main(int argc, char *argv[]){
     int indice = 0, tempo = 0, aux = 0;
     memoria m;
     int* tabela_paginas;
+    int paginas_sujas = 0;
+    int page_faults = 0;
+    int aux_sujas = 0;
 
     //Recebendo parâmetros
     if(argc >= MIN_PARAM){
@@ -67,24 +70,31 @@ int main(int argc, char *argv[]){
     while (fscanf(arq_entrada,"%X %c",&addr,&rw) != EOF) {
         ender_page = addr >> bits_ignorar;
         aux = verificar_memoria(tabela_paginas, ender_page, indice, rw, tempo, m, num_blocos);
+        aux_sujas = 0;
+        if(rw == 'W'){
+            paginas_sujas++;
+        }
         if(aux == -2){
             if(strcmp(algoritmo, "fifo") == 0){
-                algoritmos_reposicao(tabela_paginas, ender_page, rw, tempo, m, num_blocos, 0);
+                aux_sujas = algoritmos_reposicao(tabela_paginas, ender_page, rw, tempo, m, num_blocos, 0);
 
             } else if(strcmp(algoritmo, "lru") == 0){
-                algoritmos_reposicao(tabela_paginas, ender_page, rw, tempo, m, num_blocos, 1);
+                aux_sujas = algoritmos_reposicao(tabela_paginas, ender_page, rw, tempo, m, num_blocos, 1);
 
             } else if(strcmp(algoritmo, "random") == 0){
-                algoritmos_reposicao(tabela_paginas, ender_page, rw, tempo, m, num_blocos, 2);
+                aux_sujas = algoritmos_reposicao(tabela_paginas, ender_page, rw, tempo, m, num_blocos, 2);
 
             } else if(strcmp(algoritmo, "2a") == 0){
-                algoritmos_reposicao(tabela_paginas, ender_page, rw, tempo, m, num_blocos, 3);
+                aux_sujas = algoritmos_reposicao(tabela_paginas, ender_page, rw, tempo, m, num_blocos, 3);
 
             }
+            page_faults++;
         } else if(aux == 0){
             indice++;
+            page_faults++;
         }
-        tempo++;
+        tempo++;        
+            paginas_sujas = paginas_sujas + aux_sujas;
     }
     
     printf("\n---------------------------------------------");
@@ -94,8 +104,8 @@ int main(int argc, char *argv[]){
     printf("\n\tTamanho das paginas: %d KB", tam_pagina);
     printf("\n\tAlgoritmo de reposicao: %s", algoritmo);
     printf("\n\nResultados:");
-    printf("\n\tPaginas lidas: ");
-    printf("\n\tPaginas escritas: ");
+    printf("\n\tPaginas lidas: %d", page_faults);
+    printf("\n\tPaginas escritas: %d", paginas_sujas);
     printf("\n---------------------------------------------\n");
 
     free(m);

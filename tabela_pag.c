@@ -39,18 +39,18 @@ int verificar_memoria(int* tabela_paginas, long int ender, int indice, char rw, 
 		if (indice < tam_memoria){
 			associar_memoria(indice, ender, rw, tempo, m);
 			tabela_paginas[ender] = indice;
-			printf("\nSalvo: %X na memoria: %d", ender, indice);
+			//printf("\nSalvo: %X na memoria: %d", ender, indice);
 			return 0;
 		}
 		else{
-			printf("\nPage Fault");
+			//printf("\nPage Fault");
 		    return -2;
 		}
 	}
 	else{
 		i = tabela_paginas[ender];
 		alterar_memoria(i, rw, tempo, m);
-		printf("\nAtualizado: %X na memoria: %d", ender, i);	
+		//printf("\nAtualizado: %X na memoria: %d", ender, i);	
 		return -1;
 	}
 
