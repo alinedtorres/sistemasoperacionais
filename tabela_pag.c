@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void tabela_vazia(int* tabela_paginas, long int tam_vetor){
+void tabela_vazia(int** tabela_paginas, long int tam_vetor){
     int* tabela_nova = (int*) malloc(sizeof(int)*tam_vetor);
     printf("\n tamanho vetor %ld", tam_vetor);
     int i;
@@ -17,7 +17,7 @@ void tabela_vazia(int* tabela_paginas, long int tam_vetor){
             tabela_nova[i] = -1;
         }
 
-        tabela_paginas = tabela_nova;
+        *tabela_paginas = tabela_nova;
     }
 }
 

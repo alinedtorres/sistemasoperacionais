@@ -5,7 +5,7 @@
 
 //int* tabela_paginas;
 
-void tabela_vazia(int* tabela_paginas, long int tam_vetor);
+void tabela_vazia(int** tabela_paginas, long int tam_vetor);
 
 int associar_memoria(int indice, long int ender, char rw, long int time_stamp, memoria* m);
 

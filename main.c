@@ -11,7 +11,7 @@
 
 
 int main(int argc, char *argv[]){
-    char algoritmo[TAM_STRING], arq[TAM_STRING];
+    char algoritmo[TAM_STRING];
     int tam_pagina, tam_memoria, num_pagina, modo, qtd_pgs;
     int bits_ignorar;
     FILE *arq_entrada;
@@ -52,7 +52,7 @@ int main(int argc, char *argv[]){
     bits_ignorar = calc_bits_menos_signf(tam_pagina);
     qtd_pgs = tam_memoria/tam_pagina;
 
-    printf("\n\n%s %s %d %d bits: %d", algoritmo, arq, tam_pagina, tam_memoria, bits_ignorar);
+    printf("\n\n%s %d %d bits: %d", algoritmo, tam_pagina, tam_memoria, bits_ignorar);
 
     //Escolhendo algoritmo
     if(strcmp(algoritmo, "lru") == 0){
@@ -84,7 +84,7 @@ printf("\nAline\n");
     num = 32 - bits_ignorar;
     tam_tabela = pow(2,num);
 
-    tabela_vazia(tabela_paginas, tam_tabela);
+    tabela_vazia(&tabela_paginas, tam_tabela);
 
     while (fscanf(arq_entrada,"%X %c",&addr,&rw) != EOF) {
         ender_page = addr >> bits_ignorar;
