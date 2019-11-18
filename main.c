@@ -57,7 +57,7 @@ int main(int argc, char *argv[]){
     tam_tabela = pow(2, aux);
     tabela_vazia(&tabela_paginas, tam_tabela);
 
-    printf("\nbits: %d tabela: %ld \n", bits_ignorar, tam_tabela);
+    printf("\nbits: %d tabela: %ld memoria: %d\n", bits_ignorar, tam_tabela, num_blocos);
     printf("\nExecutando o simulador...");
 
     aux = 0;

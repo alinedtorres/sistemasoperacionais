@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "memoria.h"
 #include "tabela_pag.h"
@@ -30,6 +31,7 @@ void algoritmos_reposicao(int* tabela_paginas, long int ender, char rw, long int
     } else if(escolhido == 1) {
         indice = indicado_lru(m, tam_memoria, tempo);
     } else if(escolhido == 2){
+        srand(time(NULL));
         indice = rand() % tam_memoria;
     } else if(escolhido == 3) {
         indice = indicado_segunda(m, tam_memoria, tempo);
@@ -40,5 +42,6 @@ void algoritmos_reposicao(int* tabela_paginas, long int ender, char rw, long int
     tabela_paginas[m[indice].pagina] = -1;
     associar_memoria(indice, ender, rw, tempo, m);
     tabela_paginas[ender] = indice;
+    printf("\nSalvo: %X na memoria: %d", ender, indice);
 }
 

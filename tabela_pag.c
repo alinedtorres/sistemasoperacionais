@@ -24,6 +24,7 @@ void associar_memoria(int indice, long int ender, char rw, long int tempo, memor
 	m_nova[indice].pagina = ender;	
 	m_nova[indice].rw = rw;
 	m_nova[indice].tempo_entrada = tempo;
+	m_nova[indice].tempo_acesso = tempo;
 }
 
 void alterar_memoria(int indice, char rw, long int tempo, memoria m_atualiza){
@@ -38,16 +39,18 @@ int verificar_memoria(int* tabela_paginas, long int ender, int indice, char rw, 
 		if (indice < tam_memoria){
 			associar_memoria(indice, ender, rw, tempo, m);
 			tabela_paginas[ender] = indice;
+			printf("\nSalvo: %X na memoria: %d", ender, indice);
 			return 0;
 		}
 		else{
-			//pagefault
+			printf("\nPage Fault");
 		    return -2;
 		}
 	}
 	else{
 		i = tabela_paginas[ender];
-		alterar_memoria(i, rw, tempo, m);	
+		alterar_memoria(i, rw, tempo, m);
+		printf("\nAtualizado: %X na memoria: %d", ender, i);	
 		return -1;
 	}
 

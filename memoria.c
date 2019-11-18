@@ -41,40 +41,28 @@ int indicado_fifo(memoria m, int tam_memoria, long int tempo_atual){
 }
 
 int indicado_lru(memoria m, int tam_memoria, long int tempo_atual){
-    int i, ender_bloco = -1;
+    int i, ender_bloco = 0;
     long int tempo = tempo_atual;
     //Passa por todo o vetor até encontrar o menor tempo
     for(i = 0; i < tam_memoria; i++){
-        if(m[i].tempo_acesso > -1){
-            if(tempo > m[i].tempo_acesso){
-                tempo = m[i].tempo_acesso;
-                ender_bloco = i;
-            }
+        if(tempo > m[i].tempo_acesso){
+            tempo = m[i].tempo_acesso;
+            ender_bloco = i;
         }
-    }
-    //Caso nenhum arquivo tenha sido acessado desde seu carregamento na memória.
-    if(ender_bloco == -1){
-        return indicado_fifo(m, tam_memoria, tempo_atual);
     }
     return ender_bloco;
 }
 
 int indicado_segunda(memoria m, int tam_memoria, long int tempo_atual){
-    int i, ender_bloco = -1;
+    int i, ender_bloco = 0;
     long int tempo = tempo_atual;
     for(i = 0; i < tam_memoria; i++){
-        if(m[i].tempo_acesso > -1){
-            if((tempo_atual - m[i].tempo_acesso) <= TEMPO_RECENTE){
-                if(tempo > m[i].tempo_entrada){
-                    tempo = m[i].tempo_entrada;
-                    ender_bloco = i;
-                }
+        if((tempo_atual - m[i].tempo_acesso) > TEMPO_RECENTE){
+            if(tempo > m[i].tempo_entrada){
+                tempo = m[i].tempo_entrada;
+                ender_bloco = i;
             }
         }
-    }
-    //Caso nenhum arquivo tenha sido acessado desde seu carregamento na memória.
-    if(ender_bloco == -1){
-        return indicado_fifo(m, tam_memoria, tempo_atual);
     }
     return ender_bloco;
 }
