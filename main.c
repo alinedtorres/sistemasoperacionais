@@ -71,9 +71,6 @@ int main(int argc, char *argv[]){
         ender_page = addr >> bits_ignorar;
         aux = verificar_memoria(tabela_paginas, ender_page, indice, rw, tempo, m, num_blocos);
         aux_sujas = 0;
-        if(rw == 'W'){
-            paginas_sujas++;
-        }
         if(aux == -2){
             if(strcmp(algoritmo, "fifo") == 0){
                 aux_sujas = algoritmos_reposicao(tabela_paginas, ender_page, rw, tempo, m, num_blocos, 0);

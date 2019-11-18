@@ -54,16 +54,21 @@ int indicado_lru(memoria m, int tam_memoria, long int tempo_atual){
 }
 
 int indicado_segunda(memoria m, int tam_memoria, long int tempo_atual){
-    int i, ender_bloco = 0;
-    long int tempo = tempo_atual;
-    for(i = 0; i < tam_memoria; i++){
-        if((tempo_atual - m[i].tempo_acesso) > TEMPO_RECENTE){
-            if(tempo > m[i].tempo_entrada){
-                tempo = m[i].tempo_entrada;
-                ender_bloco = i;
+    int i, j, ender_bloco = 0;
+    long int tempo = tempo_atual, tempo_anterior = -1;
+   
+    ender_bloco = indicado_fifo(m, tam_memoria, tempo_atual);
+    if(m[ender_bloco].tempo_acesso != -1){
+        m[ender_bloco].tempo_acesso = -1;
+        m[ender_bloco].tempo_entrada = tempo_atual -1;
+        for(i = 0; i < tam_memoria; i++){
+            if(i != ender_bloco){
+                m[i].tempo_entrada--;
             }
         }
+    } else {
+        return ender_bloco;
     }
-    return ender_bloco;
 }
+
 
