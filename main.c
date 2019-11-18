@@ -79,8 +79,6 @@ int main(int argc, char *argv[]){
     // printf("\n>>>> Memoria >>>> pg: %ld / rw: %c / ts: %d\n", m[0].pagina, m[0].rw, m[0].time_stamp);
     // printf("\n>>>> Memoria >>>> pg: %ld / rw: %c / ts: %d\n", m[1].pagina, m[1].rw, m[1].time_stamp);
 
-printf("\nAline\n");
-            
     num = 32 - bits_ignorar;
     tam_tabela = pow(2,num);
 
@@ -88,9 +86,10 @@ printf("\nAline\n");
 
     while (fscanf(arq_entrada,"%X %c",&addr,&rw) != EOF) {
         ender_page = addr >> bits_ignorar;
+        //printf("\n indice %d", indice);
         aux = verificar_memoria(tabela_paginas, ender_page, indice, rw, time_stamp, &m, qtd_pgs);
         //printf("\n%d\n", aux);
-        /*if (aux == -2){
+        if (aux == -2){
             //pagefault
             if(strcmp(algoritmo, "lru") == 0){
                 //lru();
@@ -99,7 +98,7 @@ printf("\nAline\n");
                 //fifo();
 
             } else if(strcmp(algoritmo, "random") == 0){
-                random_alg(&tabela_paginas, qtd_pgs, addr, rw, time_stamp, &m);
+                //random_alg(&tabela_paginas, qtd_pgs, addr, rw, time_stamp, &m);
 
             } else if(strcmp(algoritmo, "2a") == 0){
                 //segunda();
@@ -111,9 +110,10 @@ printf("\nAline\n");
         }
         else{
             //pagina associada
-            indice = aux;            
+            indice++;   
+            //printf("associou");         
         }
-*/
+
 
        // printf("\nendereco %ld", ender_page);
    }
