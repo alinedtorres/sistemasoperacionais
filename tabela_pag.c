@@ -21,16 +21,14 @@ void tabela_vazia(int** tabela_paginas, long int tam_vetor){
     }
 }
 
-int associar_memoria(int indice, long int ender, char rw, long int time_stamp, memoria* m){
-	int i = indice + 1;
+void associar_memoria(int indice, long int ender, char rw, long int time_stamp, memoria* m){
 	memoria m_nova;
-	m_nova[i].pagina = ender;	
-	m_nova[i].rw = rw;
-	m_nova[i].time_stamp = time_stamp;
+	m_nova[indice].pagina = ender;	
+	m_nova[indice].rw = rw;
+	m_nova[indice].time_stamp = time_stamp;
 
 
     *m = m_nova;
-	return i;
 }
 void alterar_memoria(int indice, long int ender, char rw, long int time_stamp, memoria* m){
 	memoria m_aux;
@@ -40,25 +38,23 @@ void alterar_memoria(int indice, long int ender, char rw, long int time_stamp, m
 }
 
 int verificar_memoria(int* tabela_paginas, long int ender, int indice, char rw, long int time_stamp, memoria* m, int qtd_pgs){
-	int novo_indice = 0;
-	int i = 0;
+		int i = 0;
 
-        if(ender > 1048575 )
-        printf("\n %x, %ld", ender, ender);
 	if (tabela_paginas[ender] == -1){
-	/*		if (indice < qtd_pgs){
-			novo_indice = associar_memoria(indice, ender, rw, time_stamp, m);
-			tabela_paginas[ender] = novo_indice;
-			return novo_indice;
+			if (indice < qtd_pgs){
+			
+			associar_memoria(indice, ender, rw, time_stamp, &m);
+			//tabela_paginas[ender] = indice;
+			return 0;
 		}
 		else{
 			//pagefault
 		    return -2;
-		}*/
+		}
 	}
 	else{
-		/*i = tabela_paginas[ender];
-		alterar_memoria(i, ender, rw, time_stamp, m);	*/	
+		//i = tabela_paginas[ender];
+		//alterar_memoria(i, ender, rw, time_stamp, &m);	
 		return -1;
 	}
 

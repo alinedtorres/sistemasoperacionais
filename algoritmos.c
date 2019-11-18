@@ -18,6 +18,7 @@ int calc_bits_menos_signf(int tam_pagina){
 
 void random_alg(int* tabela_paginas, int qtd_pgs, long int ender, char rw, long int time_stamp, memoria* m){
 			int indice = rand() % qtd_pgs;
+<<<<<<< HEAD
 			int novo_indice = associar_memoria(indice, ender, rw, time_stamp, m);
 			tabela_paginas[ender] = novo_indice;
 }
@@ -35,3 +36,8 @@ void fifo_lru_alg(int* tabela_paginas, int qtd_pgs, long int ender, char rw, lon
     tabela_paginas[ender] = tabela_paginas[ultimo];
     tabela_paginas[ultimo] = -1;
 }
+=======
+			 associar_memoria(indice, ender, rw, time_stamp, m);
+			tabela_paginas[ender] = indice;
+}
+>>>>>>> 5aca59682136094eab191b57f757d1b47b39d11a
