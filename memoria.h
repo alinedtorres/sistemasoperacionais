@@ -14,10 +14,8 @@ typedef struct bloco* memoria;
 
 void memoria_vazia(memoria* m, int tam_memoria);
 
-int indicado_fifo(memoria m, int tam_memoria, long int tempo_atual);
+void associar_memoria(int indice, long int ender, char rw, long int tempo, memoria m_nova);
 
-int indicado_lru(memoria m, int tam_memoria, long int tempo_atual);
-
-int indicado_segunda(memoria m, int tam_memoria, long int tempo_atual);
+void alterar_memoria(int indice, char rw, long int tempo, memoria m_atualiza);
 
 #endif

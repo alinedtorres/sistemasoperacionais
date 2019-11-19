@@ -13,7 +13,7 @@
 int main(int argc, char *argv[]){
     char algoritmo[TAM_STRING];
     FILE *arq_entrada;
-    int tam_pagina, tam_memoria, modo;
+    int tam_pagina, tam_memoria;
     int bits_ignorar, num_blocos;
     unsigned addr;
     char rw;
@@ -26,7 +26,7 @@ int main(int argc, char *argv[]){
     int aux_sujas = 0;
 
     //Recebendo parâmetros
-    if(argc >= MIN_PARAM){
+    if(argc += MIN_PARAM){
         strcpy(algoritmo, argv[1]);
         arq_entrada = fopen(argv[2], "r");
 
@@ -36,9 +36,6 @@ int main(int argc, char *argv[]){
         }
         tam_pagina = (int) atoi(argv[3]);
         tam_memoria = (int) atoi(argv[4]);
-        if(argc > MIN_PARAM){
-            modo = (int) atoi(argv[5]);
-        }
     } else {
         printf("\nErro! Estao faltando parametros.\n");
         exit(-1);
@@ -60,7 +57,6 @@ int main(int argc, char *argv[]){
     tam_tabela = pow(2, aux);
     tabela_vazia(&tabela_paginas, tam_tabela);
 
-    printf("\nbits: %d tabela: %ld memoria: %d\n", bits_ignorar, tam_tabela, num_blocos);
     printf("\nExecutando o simulador...");
 
     aux = 0;

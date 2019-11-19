@@ -17,13 +17,6 @@ int calc_bits_menos_signf(int tam_pagina){
     return bits;
 }
 
-// void random_alg(int* tabela_paginas, long int ender, char rw, long int tempo, memoria m, int tam_memoria){
-//     int indice = rand() % tam_memoria;
-//     tabela_paginas[m[indice].pagina] = -1;
-//     associar_memoria(indice, ender, rw, tempo, m);
-//     tabela_paginas[ender] = indice;
-// }
-
 int algoritmos_reposicao(int* tabela_paginas, long int ender, char rw, long int tempo, memoria m, int tam_memoria, int escolhido){
     int indice, write = 0;
     if(escolhido == 0){ //0 para fifo 1 para lru 2 para random 3 para 2a
@@ -36,7 +29,6 @@ int algoritmos_reposicao(int* tabela_paginas, long int ender, char rw, long int 
     } else if(escolhido == 3) {
         indice = indicado_segunda(m, tam_memoria, tempo);
     } else {
-        //printf("\nValor invalido para algoritmo no metodo algoritmos_reposicao!\n");
         exit(-1);
     }
     if(m[indice].rw == 'W'){
@@ -45,7 +37,51 @@ int algoritmos_reposicao(int* tabela_paginas, long int ender, char rw, long int 
     tabela_paginas[m[indice].pagina] = -1;
     associar_memoria(indice, ender, rw, tempo, m);
     tabela_paginas[ender] = indice;
-    //printf("\nSalvo: %X na memoria: %d", ender, indice);
     return write;
+}
+
+int indicado_fifo(memoria m, int tam_memoria, long int tempo_atual){
+    int i, ender_bloco = 0;
+    long int tempo = tempo_atual;
+    //Passa por todo o vetor até encontrar o menor tempo
+    for(i = 0; i < tam_memoria; i++){
+        if(tempo > m[i].tempo_entrada){
+            tempo = m[i].tempo_entrada;
+            ender_bloco = i;
+        }
+    }
+    return ender_bloco;
+}
+
+int indicado_lru(memoria m, int tam_memoria, long int tempo_atual){
+    int i, ender_bloco = 0;
+    long int tempo = tempo_atual;
+    //Passa por todo o vetor até encontrar o menor tempo
+    for(i = 0; i < tam_memoria; i++){
+        if(tempo > m[i].tempo_acesso){
+            tempo = m[i].tempo_acesso;
+            ender_bloco = i;
+        }
+    }
+    return ender_bloco;
+}
+
+int indicado_segunda(memoria m, int tam_memoria, long int tempo_atual){
+    int i, ender_bloco = 0;
+    
+    while(1){
+        ender_bloco = indicado_fifo(m, tam_memoria, tempo_atual);
+        if(m[ender_bloco].tempo_acesso != -1){
+            m[ender_bloco].tempo_acesso = -1;
+            m[ender_bloco].tempo_entrada = tempo_atual - 1;
+            for(i = 0; i < tam_memoria; i++){
+                if(i != ender_bloco){
+                    m[i].tempo_entrada = m[i].tempo_entrada - 1;
+                }
+            }
+        } else {
+            return ender_bloco;
+        }
+    }
 }
 

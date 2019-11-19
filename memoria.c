@@ -27,49 +27,16 @@ void memoria_vazia(memoria* m, int tam_memoria){
     }
 }
 
-int indicado_fifo(memoria m, int tam_memoria, long int tempo_atual){
-    int i, ender_bloco = 0;
-    long int tempo = tempo_atual;
-    //Passa por todo o vetor até encontrar o menor tempo
-    for(i = 0; i < tam_memoria; i++){
-        if(tempo > m[i].tempo_entrada){
-            tempo = m[i].tempo_entrada;
-            ender_bloco = i;
-        }
-    }
-    return ender_bloco;
+void associar_memoria(int indice, long int ender, char rw, long int tempo, memoria m_nova){
+	m_nova[indice].pagina = ender;	
+	m_nova[indice].rw = rw;
+	m_nova[indice].tempo_entrada = tempo;
+	m_nova[indice].tempo_acesso = tempo;
 }
 
-int indicado_lru(memoria m, int tam_memoria, long int tempo_atual){
-    int i, ender_bloco = 0;
-    long int tempo = tempo_atual;
-    //Passa por todo o vetor até encontrar o menor tempo
-    for(i = 0; i < tam_memoria; i++){
-        if(tempo > m[i].tempo_acesso){
-            tempo = m[i].tempo_acesso;
-            ender_bloco = i;
-        }
-    }
-    return ender_bloco;
-}
-
-int indicado_segunda(memoria m, int tam_memoria, long int tempo_atual){
-    int i, ender_bloco = 0;
-    
-    while(1){
-        ender_bloco = indicado_fifo(m, tam_memoria, tempo_atual);
-        if(m[ender_bloco].tempo_acesso != -1){
-            m[ender_bloco].tempo_acesso = -1;
-            m[ender_bloco].tempo_entrada = tempo_atual - 1;
-            for(i = 0; i < tam_memoria; i++){
-                if(i != ender_bloco){
-                    m[i].tempo_entrada = m[i].tempo_entrada - 1;
-                }
-            }
-        } else {
-            return ender_bloco;
-        }
-    }
+void alterar_memoria(int indice, char rw, long int tempo, memoria m_atualiza){
+	m_atualiza[indice].rw = rw;
+	m_atualiza[indice].tempo_acesso = tempo;
 }
 
 
